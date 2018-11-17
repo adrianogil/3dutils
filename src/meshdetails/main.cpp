@@ -12,7 +12,7 @@ bool ImportModel(const std::string& pFile)
 	// And have it read the given file with some example postprocessing
 	// Usually - if speed is not the most important aspect for you - you'll
 	// probably to request more postprocessing that we do in this example
-	const aiScene* scene = importer.ReadFile(pFile, 
+	const aiScene* scene = importer.ReadFile(pFile,
 			aiProcess_JoinIdenticalVertices);
 
 	// If the import faield, report it
@@ -27,20 +27,24 @@ bool ImportModel(const std::string& pFile)
 
 	for (i = 0; i < scene->mNumMeshes; i++)
 	{
-		std::cout << "Number of Vertices: " << 
+		std::cout << "Number of Vertices: " <<
 			scene->mMeshes[0]->mNumVertices << std::endl;
 	}
 
-	
-	
+
+
 	return true;
 }
 
-int main()
+int main(int argc, char *argv[])
 {
-	std::cout << "Model import result" << std::endl;
-	
-	bool result = ImportModel("proceduralmesh.stl");
+	if (argc > 1) {
+		std::string target_mesh = argv[1];
+
+		std::cout << "Model import result" << std::endl;
+
+		bool result = ImportModel(target_mesh);
+	}
 
 	return  0;
 }
